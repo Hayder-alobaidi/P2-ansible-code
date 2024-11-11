@@ -1,0 +1,25 @@
+plugin: amazon.aws.aws_ec2  # Use the AWS EC2 plugin for dynamic inventory
+regions:
+  - us-east-1  # Specify your AWS region
+filters: {}  # Remove filters to include all instances for now
+keyed_groups:
+  - key: tags.ServerType
+    prefix: ServerType_  # Group instances by ServerType tag
+hostnames:
+  - tag:Name  # Use the 'Name' tag as the hostname
+compose:
+  ansible_host: private_ip_address  # Use private IP address for SSH connections
+strict: False  # Ensure configuration doesn't fail on unexpected instances
+
+# Additional section for managing the localhost
+# Ensure the local group only includes localhost
+local:
+  hosts:
+    localhost:
+      ansible_connection: local  # Define localhost for Ansible control node
+### commnd to test with 
+# ansible-inventory -i /etc/ansible/inventory/aws_ec2.yaml --list | jq -r '. as $root | $root._meta.hostvars | to_entries[] | "\(.key): \(.value.ansible_host)"'
+# ansible-inventory -i /etc/ansible/inventory/aws_ec2.yaml --graph
+
+# ansible all -i /etc/ansible/inventory/aws_ec2.yaml -m ping -l ServerType__web_servers
+# ansible localhost -i /etc/ansible/inventory/aws_ec2.yaml -m ping
