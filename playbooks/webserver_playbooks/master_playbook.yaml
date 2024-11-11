@@ -1,0 +1,9 @@
+---
+- name: Change Hostnames of Servers
+  import_playbook: change_hostname.yaml
+
+- name: Set up EPEL and Snap repositories
+  import_playbook: configure_repositories.yaml
+
+- name: Install and Configure HTTPD on Servers
+  import_playbook: install_httpd.yaml

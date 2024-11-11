@@ -1,0 +1,21 @@
+---
+- name: Ensure hostnames match inventory names
+  hosts: web_servers
+  become: yes  # Use sudo to execute tasks with root privileges
+  tasks:
+    - name: Set hostname to match inventory name
+      hostname:
+        name: "{{ inventory_hostname }}"
+
+    - name: Update /etc/hostname
+      lineinfile:
+        path: /etc/hostname
+        line: "{{ inventory_hostname }}"
+        create: yes
+
+    - name: Ensure the hostname is set in /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        regexp: '^127.0.0.1'
+        line: "127.0.0.1 {{ inventory_hostname }}"
+        create: yes
