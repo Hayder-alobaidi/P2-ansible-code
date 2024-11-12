@@ -4,13 +4,6 @@
   become: yes
 
   tasks:
-    - name: Install dependencies
-      yum:
-        name:
-          - figlet
-          - lolcat
-        state: present
-
     - name: Copy the system information script to /etc/profile.d/
       copy:
         src: /opt/ansible/script/motd.sh
