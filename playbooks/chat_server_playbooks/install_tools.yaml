@@ -17,7 +17,7 @@
     - name: Install lolcat
       snap:
         name: lolcat
-        state: latest
+        state: present
 
 
     # Add more tasks here to install other tools
