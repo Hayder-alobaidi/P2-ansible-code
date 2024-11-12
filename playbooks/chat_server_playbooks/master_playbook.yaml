@@ -6,4 +6,4 @@
   import_playbook: configure_repositories.yaml
 
 - name: Install Necessary tools 
-  import_playbook: insstall_tools.yaml
+  import_playbook: install_tools.yaml
