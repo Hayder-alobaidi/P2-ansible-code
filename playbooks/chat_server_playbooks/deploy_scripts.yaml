@@ -6,7 +6,7 @@
   tasks:
     - name: Copy the system information script to /etc/profile.d/
       copy:
-        src: /opt/ansible/script/motd.sh
+        src: /opt/ansible/scripts/motd.sh
         dest: /etc/profile.d/motd.sh
         mode: '0755'
 
