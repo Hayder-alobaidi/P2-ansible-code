@@ -5,5 +5,9 @@
 - name: Set up EPEL and Snap repositories
   import_playbook: configure_repositories.yaml
 
+- name: Install Necessary tools 
+  import_playbook: insstall_tools.yaml
+  
 - name: Install and Configure HTTPD on Servers
   import_playbook: install_httpd.yaml
+
