@@ -1,6 +1,6 @@
 ---
 - name: Set up EPEL and Snap repositories
-  hosts: localhost
+  hosts: chat_server
   become: yes
   tasks:
     - name: Install EPEL repository
