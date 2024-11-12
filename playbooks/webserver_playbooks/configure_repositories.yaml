@@ -1,6 +1,6 @@
 ---
 - name: Set up EPEL and Snap repositories
-  hosts: web_servers
+  hosts: localhost
   become: yes
   tasks:
     - name: Install EPEL repository
@@ -21,3 +21,11 @@
         name: snapd
         enabled: yes
         state: started
+      
+    - name: Create custom profile script for PATH
+      copy:
+        dest: /etc/profile.d/snap_path.sh
+        content: |
+          #!/bin/sh
+          export PATH=$PATH:/snap/bin
+        mode: '0755'

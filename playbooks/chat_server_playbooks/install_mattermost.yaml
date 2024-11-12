@@ -1,0 +1,114 @@
+---
+- name: Install and configure Mattermost
+  hosts: chat_server  # Replace with the appropriate host group
+  become: yes
+
+  tasks:
+    - name: Update all repositories and upgrade packages
+      yum:
+        name: "*"
+        state: latest
+
+    - name: Install Git
+      yum:
+        name: git
+        state: present
+
+    - name: Download Mattermost tarball
+      get_url:
+        url: https://releases.mattermost.com/10.1.2/mattermost-10.1.2-linux-amd64.tar.gz
+        dest: /tmp/mattermost-10.1.2-linux-amd64.tar.gz
+
+    - name: Extract Mattermost tarball
+      unarchive:
+        src: /tmp/mattermost-10.1.2-linux-amd64.tar.gz
+        dest: /opt
+        remote_src: yes
+
+    - name: Create Mattermost data directory
+      file:
+        path: /opt/mattermost/data
+        state: directory
+        owner: mattermost
+        group: mattermost
+        mode: '0770'
+
+    - name: Create Mattermost user and group
+      user:
+        name: mattermost
+        system: yes
+        create_home: no
+
+    - name: Set file and folder permissions for Mattermost
+      file:
+        path: /opt/mattermost
+        state: directory
+        owner: mattermost
+        group: mattermost
+        recurse: yes
+
+    - name: Set group write permissions to the Mattermost directory
+      file:
+        path: /opt/mattermost
+        state: directory
+        mode: '0775'
+        recurse: yes
+
+    - name: Create systemd unit file for Mattermost
+      copy:
+        dest: /lib/systemd/system/mattermost.service
+        content: |
+          [Unit]
+          Description=Mattermost
+          After=network.target
+
+          [Service]
+          Type=notify
+          ExecStart=/opt/mattermost/bin/mattermost
+          TimeoutStartSec=3600
+          KillMode=mixed
+          Restart=always
+          RestartSec=10
+          WorkingDirectory=/opt/mattermost
+          User=mattermost
+          Group=mattermost
+          LimitNOFILE=49152
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Reload systemd
+      command: systemctl daemon-reload
+
+    - name: Copy default config file
+      copy:
+        src: /opt/mattermost/config/config.json
+        dest: /opt/mattermost/config/config.defaults.json
+        remote_src: yes
+
+    - name: Configure Mattermost settings
+      replace:
+        path: /opt/mattermost/config/config.json
+        regexp: '"DriverName": ".+?",'
+        replace: '"DriverName": "postgres",'
+
+    - name: Set DataSource in config.json
+      lineinfile:
+        path: /opt/mattermost/config/config.json
+        regexp: '"DataSource": ".+?",'
+        line: '"DataSource": "postgres://mmuser:YOUR_PASSWORD@YOUR_HOST:5432/mattermost?sslmode=disable&connect_timeout=10",'
+        backup: yes
+
+    - name: Set SiteURL in config.json
+      lineinfile:
+        path: /opt/mattermost/config/config.json
+        regexp: '"SiteURL": ".+?",'
+        line: '"SiteURL": "https://mattermost.hayder.com",'
+        backup: yes
+
+    - name: Start Mattermost service
+      service:
+        name: mattermost
+        state: started
+        enabled: yes
+

@@ -1,0 +1,17 @@
+---
+- name: Install necessary tools
+  hosts: web_servers
+  become: yes
+
+  tasks:
+    - name: Update all repositories
+      yum:
+        name: "*"
+        state: latest
+
+    - name: Install figlet
+      yum:
+        name: figlet
+        state: present
+
+    # Add more tasks here to install other tools
