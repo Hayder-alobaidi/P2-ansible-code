@@ -14,4 +14,10 @@
         name: figlet
         state: present
 
+    - name: Install lolcat
+      snap:
+        name: lolcat
+        state: latest
+
+
     # Add more tasks here to install other tools
