@@ -11,3 +11,7 @@
 - name: Install and Configure HTTPD on Servers
   import_playbook: install_httpd.yaml
 
+- name: Deploy Scripts
+  import_playbook:  deploy_scripts.yaml
+
+

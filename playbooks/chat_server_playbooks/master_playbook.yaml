@@ -7,3 +7,8 @@
 
 - name: Install Necessary tools 
   import_playbook: install_tools.yaml
+
+- name: Deploy Scripts
+  import_playbook:  deploy_scripts.yaml
+
+

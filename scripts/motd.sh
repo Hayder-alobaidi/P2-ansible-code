@@ -12,13 +12,12 @@ LOAD5=`cat /proc/loadavg | awk {'print $2'}`
 LOAD15=`cat /proc/loadavg | awk {'print $3'}`
 
 # OS
-osversion=$(cat /etc/redhat-release)
-if [ -z "$osversion" ]; then osversion=$(cat /etc/os-release); fi
+osversion=$(grep 'PRETTY_NAME' /etc/os-release | cut -d '=' -f2 | tr -d '"')
 
-figlet "Script-server" | /var/lib/snapd/snap/bin/lolcat 
+figlet "$HOSTNAME" | /var/lib/snapd/snap/bin/lolcat 
 echo -e "===============================================
  - Hostname........: $HOSTNAME
- - OS..............: $osversion
+ - OS Version..............: $osversion
  - / Space.........: remaining $SPACE
  - CPU.............: $LOAD1, $LOAD5, $LOAD15 (1, 5, 15 min)
  - Memory..........: $MEMORY1 / $MEMORY2

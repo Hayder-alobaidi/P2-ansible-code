@@ -1,0 +1,26 @@
+---
+- name: Deploy system information script to all servers
+  hosts: chat_server
+  become: yes
+
+  tasks:
+    - name: Install dependencies
+      yum:
+        name:
+          - figlet
+          - lolcat
+        state: present
+
+    - name: Copy the system information script to /etc/profile.d/
+      copy:
+        src: /opt/ansible/script/motd.sh
+        dest: /etc/profile.d/motd.sh
+        mode: '0755'
+
+    - name: Run the system information script
+      command: /etc/profile.d/motd.sh
+      register: script_output
+
+    - name: Display script output
+      debug:
+        msg: "{{ script_output.stdout }}"
