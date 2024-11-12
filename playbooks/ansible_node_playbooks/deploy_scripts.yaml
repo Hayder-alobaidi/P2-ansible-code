@@ -1,6 +1,6 @@
 ---
 - name: Deploy system information script to all servers
-  hosts: chat_server
+  hosts: localhost
   become: yes
 
   tasks:
