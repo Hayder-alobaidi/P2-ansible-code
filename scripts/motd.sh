@@ -17,7 +17,7 @@ osversion=$(grep 'PRETTY_NAME' /etc/os-release | cut -d '=' -f2 | tr -d '"')
 figlet "$HOSTNAME" | /var/lib/snapd/snap/bin/lolcat 
 echo -e "===============================================
  - Hostname........: $HOSTNAME
- - OS Version..............: $osversion
+ - OS..............: $osversion
  - / Space.........: remaining $SPACE
  - CPU.............: $LOAD1, $LOAD5, $LOAD15 (1, 5, 15 min)
  - Memory..........: $MEMORY1 / $MEMORY2
