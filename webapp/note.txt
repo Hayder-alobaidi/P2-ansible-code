@@ -1,0 +1,5 @@
+db_config.php: This file contains database connection details and is stored outside the web root at /var/www/secure.
+
+index.php: This file displays the to-do list and includes a form to add new items. It fetches data from the database and is located in the web root /var/www/html.
+
+add_todo.php: This file handles form submissions to add new items to the to-do list. It processes the input and inserts new records into the database. It is located in the web root /var/www/html.
