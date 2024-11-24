@@ -1,0 +1,1 @@
+10-php.conf : This file contains php config and this file will go to /etc/httpd/conf.modules.d/10-php.conf. #PHP will not work without it

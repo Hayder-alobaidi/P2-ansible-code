@@ -1,0 +1,83 @@
+P2-ansible_code/
+├── playbooks/
+│   ├── webservers/
+│   │   ├── main_playbook.yml
+│   ├── ansible_node/
+│   │   ├── main_playbook.yml
+│   ├── chat_server/
+│   │   ├── main_playbook.yml
+├── scripts/
+├── webserver_config/
+│   ├── httpd.conf
+│   ├── index.php
+│   └── add_todo.php
+└── roles/
+    ├── change_hostname/
+    │   └── tasks/
+    │       └── main.yml
+    ├── configure_repositories/
+    │   └── tasks/
+    │       └── main.yml
+    ├── install_tools/
+    │   └── tasks/
+    │       └── main.yml
+    ├── deploy_scripts/
+    │   └── tasks/
+    │       └── main.yml
+    ├── webserver_setup/
+    │   └── tasks/
+    │       ├── main.yml
+    │       ├── initial_setup.yml
+    │       ├── php_config.yml
+    │       ├── deploy_files.yml
+    ├── ansible_node_setup/
+    │   └── tasks/
+    │       └── main.yml
+    └── chat_server_setup/
+        └── tasks/
+            └── main.yml
+
+_________________________________________________ 
+
+for example this what each playbook will have
+
+playbooks/webservers/main_playbook.yml:
+---
+- name: Configure web servers
+  hosts: webservers
+  become: yes
+  roles:
+    - change_hostname
+    - configure_repositories
+    - install_tools
+    - deploy_scripts
+    - webserver_setup
+
+_________________________________________________
+
+for example this what one of the role have : 
+
+    ├── webserver_setup/
+    │   └── tasks/
+    │       ├── main.yaml
+    │       ├── initial_setup.yaml
+    │       ├── php_config.yaml
+    │       ├── deploy_files.yaml
+
+
+    roles/webserver_setup/tasks/main.yml will have :
+
+---
+- name: Include initial setup tasks
+  include_tasks: initial_setup.yaml
+
+- name: Include PHP configuration tasks
+  include_tasks: php_config.yaml
+
+- name: Include deployment tasks
+  include_tasks: deploy_files.yaml
+
+
+
+After creating the main.yaml I have to create call this role , 
+in the playbook section for the server for webserver will be playbooks/webserver/main_playbook

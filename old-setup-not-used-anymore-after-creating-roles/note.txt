@@ -1,0 +1,1 @@
+This was the old setup. I've simplified things by creating roles, which reduced the number of playbooks and organized the setup more efficiently

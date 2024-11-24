@@ -1,0 +1,6 @@
+---
+- name: Deploy system information script to all servers
+  hosts: localhost
+  become: yes
+
+  tasks:

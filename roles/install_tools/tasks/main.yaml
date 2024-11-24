@@ -1,0 +1,17 @@
+    - name: Update all repositories
+      yum:
+        name: "*"
+        state: latest
+
+    - name: Install figlet
+      yum:
+        name: figlet
+        state: present
+
+
+    - name: Install lolcat
+      snap:
+        name: lolcat
+        state: present
+
+    # Add more tasks here to install other tools

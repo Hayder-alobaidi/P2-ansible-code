@@ -1,0 +1,9 @@
+---
+- name: Configure ansible server
+  hosts: localhost
+  become: yes
+  roles:
+    - change_hostname
+    - configure_repositories
+    - install_tools
+    - deploy_scripts

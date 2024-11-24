@@ -1,0 +1,12 @@
+    - name: Install httpd package
+      yum:
+        name: httpd
+        state: present
+
+    - name: Ensure httpd is started and enabled
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+        

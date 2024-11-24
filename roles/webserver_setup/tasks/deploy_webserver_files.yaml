@@ -1,0 +1,23 @@
+    - name: Copy db_config.php to /var/www/secure
+      copy:
+        src: /opt/ansible/webapp/db_config.php
+        dest: /var/www/secure/db_config.php
+        owner: root
+        group: root
+        mode: '0600'   
+
+    - name: Copy index.php to /var/www/html
+      copy:
+        src: /opt/ansible/webserver_files/index.php
+        dest: /var/www/html/index.php
+        owner: apache
+        group: apache
+        mode: '0644'
+
+    - name: Copy add_todo.php to /var/www/html
+      copy:
+        src: /opt/ansible/webserver_files/add_todo.php
+        dest: /var/www/html/add_todo.php
+        owner: apache
+        group: apache
+        mode: '0644'

@@ -1,0 +1,9 @@
+---
+- name: Include initial setup tasks
+  include_tasks: initial_setup.yaml
+
+- name: Include PHP configuration tasks
+  include_tasks: php_config.yaml
+
+- name: Include deployment tasks
+  include_tasks: deploy_files.yaml

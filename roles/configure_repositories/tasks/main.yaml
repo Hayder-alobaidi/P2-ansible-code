@@ -1,0 +1,29 @@
+    - name: Install EPEL repository
+      command: sudo amazon-linux-extras install epel -y
+
+    - name: Download Snapd repository configuration
+      get_url:
+        url: https://bboozzoo.github.io/snapd-amazon-linux/amzn2/snapd.repo
+        dest: /etc/yum.repos.d/snapd.repo
+
+    - name: Install Snapd
+      yum:
+        name: snapd
+        state: present
+
+    - name: Enable and start Snapd service
+      systemd:
+        name: snapd
+        enabled: yes
+        state: started
+      
+    - name: Create custom profile script for PATH
+      copy:
+        dest: /etc/profile.d/snap_path.sh
+        content: |
+          #!/bin/sh
+          export PATH=$PATH:/snap/bin
+        mode: '0755'
+
+
+

@@ -1,0 +1,10 @@
+---
+- name: Configure web servers
+  hosts: webservers
+  become: yes
+  roles:
+    - change_hostname
+    - configure_repositories
+    - install_tools
+    - deploy_scripts
+    - webserver_setup

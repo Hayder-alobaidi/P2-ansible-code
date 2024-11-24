@@ -1,9 +1,3 @@
----
-- name: Deploy system information script to all servers
-  hosts: localhost
-  become: yes
-
-  tasks:
     - name: Copy the system information script to /etc/profile.d/
       copy:
         src: /opt/ansible/scripts/motd.sh
