@@ -2,6 +2,15 @@
       yum:
         name: httpd
         state: present
+    
+    - name: Install PHP and mod_php package
+      yum:
+        name:
+          - php
+          - php-common
+          - php-cli
+          - mod_php
+        state: present
 
     - name: Ensure httpd is started and enabled
       service:
