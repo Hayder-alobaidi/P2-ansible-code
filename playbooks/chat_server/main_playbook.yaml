@@ -1,6 +1,6 @@
 ---
 - name: Configure chat server
-  hosts: chatserver
+  hosts: chat_server
   become: yes
   roles:
     - change_hostname

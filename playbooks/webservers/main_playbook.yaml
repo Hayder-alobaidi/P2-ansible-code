@@ -1,6 +1,6 @@
 ---
 - name: Configure web servers
-  hosts: webservers
+  hosts: web_servers
   become: yes
   roles:
     - change_hostname
