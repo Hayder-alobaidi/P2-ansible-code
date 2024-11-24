@@ -6,4 +6,4 @@
   include_tasks: php_config.yaml
 
 - name: Include deployment tasks
-  include_tasks: deploy_webserver_files
+  include_tasks: deploy_webserver_files.yaml
