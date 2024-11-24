@@ -1,6 +1,6 @@
     - name: Copy db_config.php to /var/www/secure
       copy:
-        src: /opt/ansible/webapp/db_config.php
+        src: /opt/ansible/webserver_files/db_config.php
         dest: /var/www/secure/db_config.php
         owner: root
         group: root
