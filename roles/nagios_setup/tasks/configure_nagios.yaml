@@ -20,7 +20,7 @@
 
     - name: Generate Nagios hosts configuration
       template:
-        src: templates/host.cfg.j2
+        src: /opt/ansible/roles/nagios_setup/templates/hosts.cfg.j2
         dest: /etc/nagios/servers/{{ inventory_hostname }}.cfg
 
 
