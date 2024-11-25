@@ -34,6 +34,6 @@
     - name: Create Nagios configuration files
       template:
         src: nagios_template.cfg.j2
-        dest: /etc/nagios/servers/{{ inventory_hostname }}.cfg
-
+        dest: "/etc/nagios/servers/{{ item }}.cfg"
+      loop: "{{ groups['all'] }}"  # Loop over all hosts in the inventory (you can also limit this to specific groups)
 
