@@ -6,5 +6,5 @@
     - change_hostname
     - configure_repositories
     - install_tools
-    - deploy_scripts
+    - deploy_scripts_and_files
     - nagios_setup

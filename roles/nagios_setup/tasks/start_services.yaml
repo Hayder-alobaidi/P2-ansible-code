@@ -10,3 +10,8 @@
         state: restarted
         enabled: yes
 
+- name: Restart Nagios service
+  service:
+        name: nagios
+        state: restarted
+        enabled: yes

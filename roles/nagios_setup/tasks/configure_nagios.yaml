@@ -3,6 +3,22 @@
       vars:
         password: 'password'
 
+
+    - name: Ensure Nagios command definition for check_nrpe
+      blockinfile:
+        path: /etc/nagios/objects/commands.cfg
+        block: |
+          define command{
+              command_name        check_nrpe
+              command_line        $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+          }
+        marker: "# {mark} ANSIBLE MANAGED BLOCK check_nrpe"
+
+    - name: Create Nagios configuration files
+      template:
+        src: nagios_template.cfg.j2
+        dest: /etc/nagios/servers/{{ inventory_hostname }}.cfg
+
     - name: Ensure nagios.cfg includes servers directory
       lineinfile:
         path: /etc/nagios/nagios.cfg
@@ -10,17 +26,14 @@
         line: 'cfg_dir=/etc/nagios/servers'
         state: present
 
-    - name: Create servers directory
+    - name: Create configuration directory
       file:
         path: /etc/nagios/servers
         state: directory
-        owner: nagios
-        group: nagios
-        mode: '0750'
 
-    - name: Generate Nagios hosts configuration
+    - name: Create Nagios configuration files
       template:
-        src: /opt/ansible/roles/nagios_setup/templates/hosts.cfg.j2
+        src: nagios_template.cfg.j2
         dest: /etc/nagios/servers/{{ inventory_hostname }}.cfg
 
 

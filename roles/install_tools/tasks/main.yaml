@@ -15,3 +15,16 @@
         state: present
 
     # Add more tasks here to install other tools
+
+    - name: Install NRPE and Nagios plugins
+      yum:
+        name:
+          - nrpe
+          - nagios-plugins-ping
+          - nagios-plugins-disk
+          - nagios-plugins-users
+          - nagios-plugins-procs
+          - nagios-plugins-load
+          - nagios-plugins-swap
+          - nagios-plugins-ssh
+        state: present
