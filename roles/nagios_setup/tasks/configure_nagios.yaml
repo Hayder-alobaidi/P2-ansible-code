@@ -2,3 +2,25 @@
       command: htpasswd -b /etc/nagios/passwd nagiosadmin {{ password }}
       vars:
         password: 'password'
+
+    - name: Ensure nagios.cfg includes servers directory
+      lineinfile:
+        path: /etc/nagios/nagios.cfg
+        regexp: '^#cfg_dir=/etc/nagios/servers'
+        line: 'cfg_dir=/etc/nagios/servers'
+        state: present
+
+    - name: Create servers directory
+      file:
+        path: /etc/nagios/servers
+        state: directory
+        owner: nagios
+        group: nagios
+        mode: '0750'
+
+    - name: Generate Nagios hosts configuration
+      template:
+        src: templates/host.cfg.j2
+        dest: /etc/nagios/servers/{{ inventory_hostname }}.cfg
+
+
