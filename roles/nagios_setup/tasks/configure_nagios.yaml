@@ -41,6 +41,6 @@
         owner: nagios  # You can adjust permissions if needed
         group: nagios
         mode: '0644'
-      delegate_to: "{{ nagios_server }}"  # Make sure this points to the Nagios server
+      delegate_to: "{{ inventory_hostname }}"  # Make sure this points to the Nagios server
       loop: "{{ groups['all'] }}"
       when: ansible_host is defined
