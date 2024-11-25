@@ -54,7 +54,7 @@
         owner: nagios
         group: nagios
         perms: yes  # This will ensure correct permissions are set on the copied files
-        delegate_to: "{{ inventory_hostname }}"  # Make sure this points to the Nagios server
+      delegate_to: "{{ inventory_hostname }}"  # Make sure this points to the Nagios server
       loop: "{{ groups['all'] }}"
       when: ansible_host is defined
    
