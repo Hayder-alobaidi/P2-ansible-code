@@ -15,8 +15,8 @@
 
     - name: Copy the NRPE configuration file
       copy:
-        src: files/nrpe.cfg
-        dest: /opt/ansible/files/nrpe.cfg
+        src: /opt/ansible/files/nrpe.cfg
+        dest: /etc/nagios/nrpe.cfg
         owner: root
         group: root
         mode: '0644'
