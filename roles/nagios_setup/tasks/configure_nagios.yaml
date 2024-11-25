@@ -54,7 +54,11 @@
     #   delegate_to: "{{ inventory_hostname }}"  # Make sure this points to the Nagios server
     #   loop: "{{ groups['all'] }}"
     #   when: ansible_host is defined
-   
+
+    - name: Pause to ensure file creation
+      pause:
+        seconds: 5
+
     - name: Synchronize configuration files from remote hosts to the Nagios server
       synchronize:
         src: "/tmp/{{ item }}.cfg"        # Source file on the remote host
