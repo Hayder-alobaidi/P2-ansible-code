@@ -14,11 +14,6 @@
           }
         marker: "# {mark} ANSIBLE MANAGED BLOCK check_nrpe"
 
-    - name: Create Nagios configuration files
-      template:
-        src: nagios_template.cfg.j2
-        dest: /etc/nagios/servers/{{ inventory_hostname }}.cfg
-
     - name: Ensure nagios.cfg includes servers directory
       lineinfile:
         path: /etc/nagios/nagios.cfg
