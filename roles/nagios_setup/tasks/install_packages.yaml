@@ -10,19 +10,16 @@
     name: httpd
     state: present
 
-- name: Install required packages
+- name: Install Nagios and plugins
   yum:
-    name: "{{ packages }}"
+    name:
+      - nagios
+      - nagios-plugins-ping
+      - nagios-plugins-disk
+      - nagios-plugins-users
+      - nagios-plugins-procs
+      - nagios-plugins-load
+      - nagios-plugins-swap
+      - nagios-plugins-ssh
+      - nagios-plugins-http
     state: present
-    vars:
-      packages:
-        - nagios
-        - nagios-plugins-ping
-        - nagios-plugins-disk
-        - nagios-plugins-users
-        - nagios-plugins-procs
-        - nagios-plugins-load
-        - nagios-plugins-swap
-        - nagios-plugins-ssh
-        - nagios-plugins-http
-
