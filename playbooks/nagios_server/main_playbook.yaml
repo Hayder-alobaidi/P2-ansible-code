@@ -1,10 +1,8 @@
 ---
 - name: Install and configure Nagios
-  hosts: nagios_server
-  become: yes
-  roles:
-    - change_hostname
-    - configure_repositories
-    - install_tools
-    - deploy_scripts_and_files
-    - nagios_setup
+  tasks:
+    - name: Install Nagios
+      import_playbook: install_configure_nagios.yaml
+
+    - name: Configure Nagios
+      import_playbook: get-servers-cfg-file.yaml

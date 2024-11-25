@@ -10,7 +10,7 @@
         flat: yes  # Prevent directory structure from being recreated on the control node
 
 - name: Copy files to the Nagios server
-  hosts: nagios  # This is the target server where all files will be copied
+  hosts: nagios_server  # This is the target server where all files will be copied
   gather_facts: true
   tasks:
     - name: Find fetched files on the control host
@@ -22,7 +22,7 @@
     - name: Copy the fetched files to the Nagios server
       copy:
         src: "{{ item.path }}"  # Path to the fetched file on the control host
-        dest: /path/to/destination/on/nagios/server/{{ item.path | basename }}  # Destination path on the Nagios server
+        dest: //etc/nagios/servers/{{ item.path | basename }}  # Destination path on the Nagios server
         owner: root
         group: root
         mode: '0644'

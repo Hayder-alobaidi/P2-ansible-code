@@ -22,4 +22,6 @@
       - nagios-plugins-swap
       - nagios-plugins-ssh
       - nagios-plugins-http
+      - nagios-plugins-nrpe 
+      - nrpe
     state: present
