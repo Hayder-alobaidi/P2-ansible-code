@@ -34,14 +34,27 @@
       vars:
         ansible_host: "{{ hostvars[item].ansible_host }}"  # Ensure ansible_host is available
 
-    - name: Move configuration files to Nagios server
-      copy:
-        src: "/tmp/{{ item }}.cfg"
-        dest: "/etc/nagios/servers/{{ item }}.cfg"  # Path on Nagios server
-        owner: nagios  # You can adjust permissions if needed
+    # - name: Move configuration files to Nagios server
+    #   copy:
+    #     src: "/tmp/{{ item }}.cfg"
+    #     dest: "/etc/nagios/servers/{{ item }}.cfg"  # Path on Nagios server
+    #     owner: nagios  # You can adjust permissions if needed
+    #     group: nagios
+    #     mode: '0644'
+    #     remote_src: true 
+    #   delegate_to: "{{ inventory_hostname }}"  # Make sure this points to the Nagios server
+    #   loop: "{{ groups['all'] }}"
+    #   when: ansible_host is defined
+
+    - name: Synchronize configuration files from remote hosts to the Nagios server
+      synchronize:
+        src: "/tmp/{{ item }}.cfg"        # Source file on the remote host
+        dest: "/etc/nagios/servers/{{ item }}.cfg"  # Destination on the Nagios server
+        mode: pull  # This means the files are pulled from the remote hosts to the Nagios server
+        owner: nagios
         group: nagios
-        mode: '0644'
-        remote_src: true 
-      delegate_to: "{{ inventory_hostname }}"  # Make sure this points to the Nagios server
+        perms: yes  # This will ensure correct permissions are set on the copied files
+        delegate_to: "{{ inventory_hostname }}"  # Make sure this points to the Nagios server
       loop: "{{ groups['all'] }}"
       when: ansible_host is defined
+   
