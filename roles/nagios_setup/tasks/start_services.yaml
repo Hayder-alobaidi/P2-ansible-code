@@ -5,6 +5,8 @@
         state: started
 
 - name: Restart httpd service
-  systemd:
+  service:
         name: httpd
         state: restarted
+        enabled: yes
+
