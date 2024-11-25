@@ -1,41 +1,41 @@
-define host{
-    use linux-server
-    host_name {{ inventory_hostname }}
-    alias {{ inventory_hostname }}
-    address {{ ansible_host }}
+define host {
+    use         linux-server
+    host_name   {{ item }}
+    alias       {{ item }}
+    address     {{ hostvars[item].ansible_host }}  # This refers to the ansible_host of each host dynamically
 }
 
-define service{
-    use generic-service
-    host_name {{ inventory_hostname }}
-    service_description PING
-    check_command check_ping!100.0,20%!500.0,60%
+define service {
+    use                     generic-service
+    host_name               {{ item }}
+    service_description     PING
+    check_command           check_ping!100.0,20%!500.0,60%
 }
 
-define service{
-    use generic-service
-    host_name {{ inventory_hostname }}
-    service_description Root Partition
-    check_command check_nrpe!check_disk!20%!10%!/
+define service {
+    use                     generic-service
+    host_name               {{ item }}
+    service_description     Root Partition
+    check_command           check_nrpe!check_disk!20%!10%!/
 }
 
-define service{
-    use generic-service
-    host_name {{ inventory_hostname }}
-    service_description Current Users
-    check_command check_nrpe!check_users!20!50
+define service {
+    use                     generic-service
+    host_name               {{ item }}
+    service_description     Current Users
+    check_command           check_nrpe!check_users!20!50
 }
 
-define service{
-    use generic-service
-    host_name {{ inventory_hostname }}
-    service_description Total Processes
-    check_command check_nrpe!check_procs!250!400!RSZDT
+define service {
+    use                     generic-service
+    host_name               {{ item }}
+    service_description     Total Processes
+    check_command           check_nrpe!check_procs!250!400!RSZDT
 }
 
-define service{
-    use generic-service
-    host_name {{ inventory_hostname }}
-    service_description Current Load
-    check_command check_nrpe!check_load!5.0,4.0,3.0!10.0,6.0,4.0
+define service {
+    use                     generic-service
+    host_name               {{ item }}
+    service_description     Current Load
+    check_command           check_nrpe!check_load!5.0,4.0,3.0!10.0,6.0,4.0
 }
