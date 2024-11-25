@@ -1,7 +1,10 @@
-# nagios_setup/tasks/start_services.yml
----
-- name: Start and enable Nagios service
-  service:
-    name: nagios
-    state: started
-    enabled: yes
+- name: Enable and start Nagios service
+  systemd:
+        name: nagios
+        enabled: true
+        state: started
+
+- name: Restart httpd service
+  systemd:
+        name: httpd
+        state: restarted

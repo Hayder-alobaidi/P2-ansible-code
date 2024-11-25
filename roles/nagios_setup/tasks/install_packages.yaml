@@ -4,13 +4,27 @@
   yum:
     update_cache: yes
 
+
+- name: Install httpd
+  yum:
+    name: httpd
+    state: present
+    enabled: yes
+
+
 - name: Install required packages
   yum:
     name: "{{ packages }}"
     state: present
-  vars:
-    packages:
-      - nagios
-      - nagios-plugins-all
-      - nrpe
-      - nrpe-selinux
+    vars:
+      packages:
+        - nagios
+        - nagios-plugins-ping
+        - nagios-plugins-disk
+        - nagios-plugins-users
+        - nagios-plugins-procs
+        - nagios-plugins-load
+        - nagios-plugins-swap
+        - nagios-plugins-ssh
+        - nagios-plugins-http
+
