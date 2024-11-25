@@ -57,8 +57,8 @@
    
     - name: Synchronize configuration files from remote hosts to the Nagios server
       synchronize:
-        src: "/tmp/{{ inventory_hostname }}.cfg"        # Source file on the remote host
-        dest: "/etc/nagios/servers/{{ inventory_hostname }}.cfg"  # Destination on the Nagios server
+        src: "/tmp/{{ item }}.cfg"        # Source file on the remote host
+        dest: "/etc/nagios/servers/{{ item }}.cfg"  # Destination on the Nagios server
         mode: pull  # This means the files are pulled from the remote hosts to the Nagios server
       delegate_to: "{{ inventory_hostname }}"  # Make sure this points to the Nagios server
       loop: "{{ groups['all'] }}"
