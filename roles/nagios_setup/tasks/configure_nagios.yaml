@@ -1,4 +1,4 @@
     - name: Add Nagios admin user
-      command: htpasswd -b /etc/nagios/passwd admin {{ password }}
+      command: htpasswd -b /etc/nagios/passwd nagiosadmin {{ password }}
       vars:
         password: 'password'
