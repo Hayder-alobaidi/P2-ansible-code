@@ -1,0 +1,7 @@
+# nagios_setup/tasks/start_services.yml
+---
+- name: Start and enable Nagios service
+  service:
+    name: nagios
+    state: started
+    enabled: yes

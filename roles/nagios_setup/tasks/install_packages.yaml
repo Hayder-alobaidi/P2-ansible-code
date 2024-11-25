@@ -1,0 +1,16 @@
+# nagios_setup/tasks/install_packages.yml
+---
+- name: Update yum cache
+  yum:
+    update_cache: yes
+
+- name: Install required packages
+  yum:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - nagios
+      - nagios-plugins-all
+      - nrpe
+      - nrpe-selinux

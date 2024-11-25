@@ -1,0 +1,10 @@
+---
+- name: Install and configure Nagios
+  hosts: nagios_server
+  become: yes
+  roles:
+    - change_hostname
+    - configure_repositories
+    - install_tools
+    - deploy_scripts
+    - nagios_setup

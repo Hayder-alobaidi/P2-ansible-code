@@ -1,0 +1,11 @@
+# nagios_setup/tasks/configure_nagios.yml
+---
+- name: Configure Nagios
+  template:
+    src: nagios.cfg.j2
+    dest: /etc/nagios/nagios.cfg
+
+- name: Configure Nagios hosts
+  template:
+    src: hosts.cfg.j2
+    dest: /etc/nagios/conf.d/hosts.cfg

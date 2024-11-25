@@ -1,0 +1,10 @@
+# nagios_setup/tasks/main.yml
+---
+- name: Include package installation tasks
+  include_tasks: install_packages.yaml
+
+- name: Include Nagios configuration tasks
+  include_tasks: configure_nagios.yaml
+
+- name: Include service management tasks
+  include_tasks: start_services.yaml
