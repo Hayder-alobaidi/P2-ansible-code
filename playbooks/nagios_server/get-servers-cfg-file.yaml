@@ -1,0 +1,29 @@
+---
+- name: Fetch files from all servers to control host
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Fetch file from the remote server to control host
+      fetch:
+        src: /tmp/{{ inventory_hostname }}.cfg  # Path to the config file on the remote servers
+        dest: /tmp/ansible_fetched_files/{{ inventory_hostname }}.cfg  # Directory on the control node where files will be saved
+        flat: yes  # Prevent directory structure from being recreated on the control node
+
+- name: Copy files to the Nagios server
+  hosts: nagios  # This is the target server where all files will be copied
+  gather_facts: true
+  tasks:
+    - name: Find fetched files on the control host
+      find:
+        paths: /tmp/ansible_fetched_files/
+        patterns: "*.cfg"
+      register: fetched_files
+
+    - name: Copy the fetched files to the Nagios server
+      copy:
+        src: "{{ item.path }}"  # Path to the fetched file on the control host
+        dest: /path/to/destination/on/nagios/server/{{ item.path | basename }}  # Destination path on the Nagios server
+        owner: root
+        group: root
+        mode: '0644'
+      with_items: "{{ fetched_files.files }}"
