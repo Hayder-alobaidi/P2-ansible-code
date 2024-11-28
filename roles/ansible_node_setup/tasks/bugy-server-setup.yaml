@@ -6,13 +6,13 @@
 
     - name: Install Bugy Server dependencies globally
       ansible.builtin.command:
-        cmd: python3 -m pip install -r /opt/bugy/script-server/requirements.txt
+        cmd: python3.7 -m pip install -r /opt/bugy/script-server/requirements.txt
       args:
         chdir: /opt/bugy/script-server
 
     - name: Initialize Bugy Server
       ansible.builtin.command:
-        cmd: python3 tools/init.py --no-npm
+        cmd: python3.7 tools/init.py --no-npm
       args:
         chdir: /opt/bugy/script-server
 
@@ -25,7 +25,7 @@
           After=network.target
 
           [Service]
-          ExecStart=/usr/bin/python3 /opt/bugy/script-server/launcher.py
+          ExecStart=/usr/bin/python3.7 /opt/bugy/script-server/launcher.py
           WorkingDirectory=/opt/bugy/script-server
           Restart=always
 
