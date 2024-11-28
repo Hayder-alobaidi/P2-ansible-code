@@ -1,8 +1,8 @@
 <?php
 // This file contains database connection details and is stored outside the web root at /var/www/secure
 
-$servername = "terraform-20241113203202616700000007.cn2iig8kcra8.us-east-1.rds.amazonaws.com";
-$username = "testuser";
+$servername = "terraform-20241125205801541300000007.c7228cqe0zrs.us-east-1.rds.amazonaws.com";
+$username = "admin";
 $password = "password";
 $dbname = "todo_app";
 

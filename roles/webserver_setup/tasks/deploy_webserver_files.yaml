@@ -8,7 +8,7 @@
         
     - name: Copy db_config.php to /var/www/secure
       copy:
-        src: /opt/ansible/webserver_files/db_config.php
+        src: /opt/ansible/files/webserver_files/db_config.php
         dest: /var/www/secure/db_config.php
         owner: root
         group: root
@@ -16,7 +16,7 @@
 
     - name: Copy index.php to /var/www/html
       copy:
-        src: /opt/ansible/webserver_files/index.php
+        src: /opt/ansible/files/webserver_files/index.php
         dest: /var/www/html/index.php
         owner: apache
         group: apache
@@ -24,7 +24,7 @@
 
     - name: Copy add_todo.php to /var/www/html
       copy:
-        src: /opt/ansible/webserver_files/add_todo.php
+        src: /opt/ansible/files/webserver_files/add_todo.php
         dest: /var/www/html/add_todo.php
         owner: apache
         group: apache

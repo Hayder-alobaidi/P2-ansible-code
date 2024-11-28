@@ -1,7 +1,7 @@
 ---
     - name: Copy 10-php.conf to /etc/httpd/conf.modules.d/
       copy:
-        src: /opt/ansible/webserver_config/10-php.conf
+        src: /opt/ansible/files/webserver_config/10-php.conf
         dest: /etc/httpd/conf.modules.d/10-php.conf
         owner: root
         group: root

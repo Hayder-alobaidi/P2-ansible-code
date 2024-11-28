@@ -1,0 +1,4 @@
+# ansible_node_setup/tasks/main.yml
+---
+- name: Include bugy server setup 
+  include_tasks: bugy-server-setup.yaml

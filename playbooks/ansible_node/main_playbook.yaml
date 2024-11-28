@@ -7,3 +7,4 @@
     - configure_repositories
     - install_tools
     - deploy_scripts_and_files
+    - ansible_node_setup
