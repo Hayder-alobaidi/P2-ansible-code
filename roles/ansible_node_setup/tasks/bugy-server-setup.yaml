@@ -2,28 +2,16 @@
    
 ---
 
-    - name: Install required packages
-      ansible.builtin.yum:
-        name:
-          - python3
-          - python3-venv
-          - git
-        state: present
+---
 
     - name: Clone Bugy Server repository
       ansible.builtin.git:
         repo: 'https://github.com/bugy/script-server.git'
         dest: /opt/bugy/script-server
 
-    - name: Create virtual environment
+    - name: Install Bugy Server dependencies globally
       ansible.builtin.command:
-        cmd: python3 -m venv /opt/bugy/script-server/venv
-      args:
-        creates: /opt/bugy/script-server/venv/bin/python
-
-    - name: Install Bugy Server dependencies
-      ansible.builtin.command:
-        cmd: /opt/bugy/script-server/venv/bin/pip install -r /opt/bugy/script-server/requirements.txt
+        cmd: python3 -m pip install -r /opt/bugy/script-server/requirements.txt
       args:
         chdir: /opt/bugy/script-server
 
@@ -36,7 +24,7 @@
           After=network.target
 
           [Service]
-          ExecStart=/opt/bugy/script-server/venv/bin/python /opt/bugy/script-server/launcher.py
+          ExecStart=/usr/bin/python3 /opt/bugy/script-server/launcher.py
           WorkingDirectory=/opt/bugy/script-server
           Restart=always
 
