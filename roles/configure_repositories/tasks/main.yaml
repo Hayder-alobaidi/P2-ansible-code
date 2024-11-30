@@ -26,5 +26,3 @@
           export PATH=$PATH:/snap/bin
         mode: '0755'
 
-
-

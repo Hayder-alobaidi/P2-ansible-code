@@ -1,6 +1,6 @@
 {
    
-    "title": "Hayder.com Script Server",
+    "title": "Hayder Script Server",
     "access": {
       "admin_users": [ "*" ]
     },
