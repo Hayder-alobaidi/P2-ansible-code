@@ -44,6 +44,11 @@
 
     - name: Copy Bugy Server conf.json to /usr/share/bugy/conf/
       ansible.builtin.copy:
-        src: /opt/ansible/files/bugy-setup/files/conf.json
+        src: /opt/ansible/files/bugy-setup-files/conf.json
         dest: /opt/bugy/script-server/conf/conf.json
         mode: '0755'
+
+    - name: restart Bugy Server service
+      ansible.builtin.systemd:
+        name: bugy-server
+        state: restarted
