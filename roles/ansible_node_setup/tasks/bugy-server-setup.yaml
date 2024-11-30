@@ -42,14 +42,8 @@
         enabled: yes
         state: started
 
-    - name: Ensure the directory /usr/share/bugy/scripts/ exists
-      ansible.builtin.file:
-        path: /usr/share/bugy/scripts/
-        state: directory
-        mode: '0755'
-
-    - name: Copy Bugy Server scripts to /usr/share/bugy/scripts/
+    - name: Copy Bugy Server conf.json to /usr/share/bugy/conf/
       ansible.builtin.copy:
-        src: /opt/ansible/scripts/setup-menu-script.sh
-        dest: /usr/share/bugy/scripts/setup-menu-script.sh
+        src: /opt/ansible/files/bugy-setup/files/conf.json
+        dest: /opt/bugy/script-server/conf/conf.json
         mode: '0755'

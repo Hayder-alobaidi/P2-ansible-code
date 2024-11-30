@@ -1,0 +1,11 @@
+{
+   
+    "title": "Hayder.com Script Server",
+    "access": {
+      "admin_users": [ "*" ]
+    },
+    "logging": {
+      "execution_file": "$DATE-$ID.log",
+      "execution_date_format": "%y-%m-%d_%H-%M"
+    }
+  }
