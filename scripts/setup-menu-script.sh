@@ -50,13 +50,13 @@ done
 
 
 
-###
+# ###
 
-put this for the server URL for the script to work 
+# put this for the server URL for the script to work 
 
-Script name:
-Server-Setup-menu-Script
+# Script name:
+# Server-Setup-menu-Script
 
-Script path:
-/opt/ansible/scripts/setup-menu-script.sh
+# Script path:
+# /opt/ansible/scripts/setup-menu-script.sh
 
