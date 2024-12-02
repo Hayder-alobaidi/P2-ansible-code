@@ -4,6 +4,7 @@
   become: yes
   roles:
     - change_hostname
+    - configure_swap
     - configure_repositories
     - install_tools
     - deploy_scripts_and_files
