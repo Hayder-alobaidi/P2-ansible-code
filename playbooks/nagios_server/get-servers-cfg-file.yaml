@@ -9,7 +9,7 @@
         dest: /tmp/ansible_fetched_files/{{ inventory_hostname }}.cfg  # Directory on the control node where files will be saved
         flat: yes  # Prevent directory structure from being recreated on the control node
 
----
+
 - name: Copy configuration files to Nagios server
   hosts: nagios_server  # Target Nagios server
   gather_facts: true
@@ -62,3 +62,9 @@
     - name: Show result of verification
       debug:
         var: result.stdout
+    
+    - name: Restart Nagios service
+      service:
+        name: nagios
+        state: restarted
+        enabled: yes
