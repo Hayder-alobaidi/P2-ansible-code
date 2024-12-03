@@ -26,3 +26,12 @@
           export PATH=$PATH:/snap/bin
         mode: '0755'
 
+    - name: Ensure Amazon Linux Extras repository is installed
+      yum:
+        name: amazon-linux-extras
+        state: present
+
+    - name: Enable PHP 7.4 in Amazon Linux Extras
+      command: amazon-linux-extras enable php7.4
+      args:
+        creates: /etc/yum.repos.d/amzn2extra-php7.4.repo

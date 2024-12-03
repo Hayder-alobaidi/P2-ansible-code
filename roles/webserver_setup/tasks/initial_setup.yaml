@@ -2,20 +2,32 @@
       yum:
         name: httpd
         state: present
-    
-    - name: Install PHP and mod_php package
+  
+    - name: Clean yum metadata
+      command: yum clean metadata
+
+    - name: Install PHP and extensions
       yum:
         name:
           - php
-          - php-common
           - php-cli
-          - mod_php
+          - php-fpm
+          - php-mysqlnd
         state: present
 
-    - name: Ensure httpd is started and enabled
+    - name: Start and enable php-fpm service
       service:
-        name: httpd
+        name: php-fpm
         state: started
         enabled: yes
+
+    - name: Verify PHP version
+      command: php -v
+      register: php_version
+
+    - name: Print PHP version
+      debug:
+        msg: "PHP version installed: {{ php_version.stdout }}"
+
 
         

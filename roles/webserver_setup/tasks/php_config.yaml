@@ -7,6 +7,18 @@
         group: root
         mode: '0644'
 
+    - name: Set background color to lightblue on Server 1
+      shell: echo 'export BACKGROUND_COLOR="lightblue"' >> ~/.bashrc
+      when: ansible_hostname == "web-server-1"
+
+    - name: Set background color to lightgreen on Server 2
+      shell: echo 'export BACKGROUND_COLOR="lightgreen"' >> ~/.bashrc
+      when: ansible_hostname == "web-server-2"
+
+    - name: Source .bashrc to apply changes
+      shell: source ~/.bashrc
+
+
     - name: Restart httpd service
       service:
         name: httpd

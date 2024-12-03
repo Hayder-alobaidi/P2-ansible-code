@@ -6,13 +6,13 @@
         group: root
         mode: '0700'
         
-    - name: Copy db_config.php to /var/www/secure
-      copy:
-        src: /opt/ansible/files/webserver_files/db_config.php
-        dest: /var/www/secure/db_config.php
-        owner: root
-        group: root
-        mode: '0600'   
+    # - name: Copy db_config.php to /var/www/secure
+    #   copy:
+    #     src: /opt/ansible/files/webserver_files/db_config.php
+    #     dest: /var/www/secure/db_config.php
+    #     owner: root
+    #     group: root
+    #     mode: '0600'   
 
     - name: Copy index.php to /var/www/html
       copy:
@@ -22,10 +22,18 @@
         group: apache
         mode: '0644'
 
-    - name: Copy add_todo.php to /var/www/html
+    - name: Copy register.php to /var/www/html
       copy:
-        src: /opt/ansible/files/webserver_files/add_todo.php
-        dest: /var/www/html/add_todo.php
+        src: /opt/ansible/files/webserver_files/register.php
+        dest: /var/www/html/register.php
+        owner: apache
+        group: apache
+        mode: '0644'
+
+    - name: Copy view_users.php to /var/www/html
+      copy:
+        src: /opt/ansible/files/webserver_files/view_users.php
+        dest: /var/www/html/view_users.php
         owner: apache
         group: apache
         mode: '0644'
