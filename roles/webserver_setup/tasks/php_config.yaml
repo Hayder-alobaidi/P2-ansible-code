@@ -9,14 +9,14 @@
 
 - name: Set background color to lightblue on Server 1
   lineinfile:
-    path: /var/www/html/index.html
+    path: /var/www/html/index.php
     regexp: 'background-color:.*;'
     line: 'background-color: lightblue;'
   when: ansible_hostname == "web-server-1"
 
 - name: Set background color to lightgreen on Server 2
   lineinfile:
-    path: /var/www/html/index.html
+    path: /var/www/html/index.php
     regexp: 'background-color:.*;'
     line: 'background-color: lightgreen;'
   when: ansible_hostname == "web-server-2"
