@@ -20,8 +20,8 @@ display_menu() {
     echo -e "${GREEN}3)${RESET} Chat Server Setup"
     echo -e "${GREEN}4)${RESET} Nagios Server Setup"
     echo -e "${GREEN}5)${RESET} Log Server Setup"
-    echo -e "${GREEN}5)${RESET} database Server Setup"
-    echo -e "${RED}6)${RESET} Exit"
+    echo -e "${GREEN}6)${RESET} database Server Setup"
+    echo -e "${RED}7)${RESET} Exit"
     echo -n -e "\n${CYAN}Enter your choice [1-7]: ${RESET}"
 }
 
@@ -98,3 +98,6 @@ done
 
 # Script path:
 # /opt/ansible/scripts/setup-menu-script.sh
+
+# give permission 
+chmod +x /opt/ansible/scripts/setup-menu-script.sh
