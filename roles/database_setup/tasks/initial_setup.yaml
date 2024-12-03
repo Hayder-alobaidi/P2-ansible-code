@@ -1,48 +1,75 @@
----
-    - name: Install MySQL Server
-      yum:
-        name: mariadb-server
-        state: present
+- name: Install MariaDB Server
+  yum:
+    name: mariadb-server
+    state: present
 
-    - name: Start and enable MySQL service
-      service:
-        name: mariadb
-        state: started
-        enabled: yes
+- name: Start and enable MariaDB service
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
 
-    - name: Install required Python packages for MySQL
-      yum:
-        name:
-          - python3-PyMySQL
-          - python3-pip
-        state: present
+- name: Install required Python packages
+  yum:
+    name:
+      - python3-pip
+    state: present
 
-    - name: Install MySQL client library for Python 3
-      pip:
-        name: mysqlclient
-        state: present
-        executable: /usr/bin/pip3
+- name: Install development tools (gcc, make, etc.)
+  yum:
+    name:
+      - gcc
+      - make
+      - mysql-devel
+    state: present
 
-    - name: Create MySQL database
-      mysql_db:
-        name: registration_app
-        state: present
+- name: Install mysqlclient library for Python 3
+  pip:
+    name: mysqlclient
+    state: present
+    executable: /usr/bin/pip3
 
-    - name: Create MySQL user
-      mysql_user:
-        name: admin
-        password: password
-        priv: "registration_app.*:ALL"
-        host: "%"
-        state: present
+- name: Ensure MariaDB is started and listening
+  wait_for:
+    port: 3306
+    state: started
+    delay: 10
+    timeout: 60
 
-    - name: Create users table
-      mysql_query:
-        login_user: admin
-        login_password: password
-        query: >
-          CREATE TABLE IF NOT EXISTS registration_app.users (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL UNIQUE
-          );
+- name: Create MySQL database
+  mysql_db:
+    name: registration_app
+    state: present
+    login_user: root
+    login_password: ""
+
+- name: Create MySQL user with appropriate privileges
+  mysql_user:
+    name: admin
+    password: password
+    priv: "registration_app.*:ALL"
+    host: "localhost"
+    state: present
+    login_user: root
+    login_password: ""
+
+- name: Grant privileges to admin user
+  mysql_user:
+    name: admin
+    password: password
+    priv: "registration_app.*:ALL"
+    host: "localhost"
+    state: present
+    login_user: root
+    login_password: ""
+
+- name: Create users table
+  mysql_query:
+    login_user: admin
+    login_password: password
+    query: |
+      CREATE TABLE IF NOT EXISTS registration_app.users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL UNIQUE
+      );
