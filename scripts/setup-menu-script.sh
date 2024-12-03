@@ -22,7 +22,7 @@ display_menu() {
     echo -e "${GREEN}5)${RESET} Log Server Setup"
     echo -e "${GREEN}5)${RESET} database Server Setup"
     echo -e "${RED}6)${RESET} Exit"
-    echo -n -e "\n${CYAN}Enter your choice [1-6]: ${RESET}"
+    echo -n -e "\n${CYAN}Enter your choice [1-7]: ${RESET}"
 }
 
 # Function to run playbook
