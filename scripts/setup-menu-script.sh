@@ -76,7 +76,10 @@ while true; do
     esac
 
     # Ask the user if they want to return to the menu or exit
-    read -p "Would you like to go back to the menu? (y/n): " go_back
+    if ! read -t 30 -p "Would you like to go back to the menu? (y/n): " go_back; then
+        echo -e "\n${RED}Timeout! No input received. Exiting...${RESET}"  # Red color
+        exit 1
+    fi
     if [[ "$go_back" != "y" && "$go_back" != "Y" ]]; then
         echo -e "\n${RED}Exiting... Goodbye! See you next time.${RESET}"  # Red color
         exit 0
