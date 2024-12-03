@@ -1,0 +1,35 @@
+---
+    - name: Install MySQL Server
+      yum:
+        name: mariadb-server
+        state: present
+
+    - name: Start and enable MySQL service
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+    - name: Create MySQL database
+      mysql_db:
+        name: registration_app
+        state: present
+
+    - name: Create MySQL user
+      mysql_user:
+        name: admin
+        password: password
+        priv: "registration_app.*:ALL"
+        host: "%"
+        state: present
+
+    - name: Create users table
+      mysql_query:
+        login_user: admin
+        login_password: password
+        query: >
+          CREATE TABLE IF NOT EXISTS registration_app.users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL UNIQUE
+          );
