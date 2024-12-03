@@ -20,6 +20,7 @@ display_menu() {
     echo -e "${GREEN}3)${RESET} Chat Server Setup"
     echo -e "${GREEN}4)${RESET} Nagios Server Setup"
     echo -e "${GREEN}5)${RESET} Log Server Setup"
+    echo -e "${GREEN}5)${RESET} database Server Setup"
     echo -e "${RED}6)${RESET} Exit"
     echo -n -e "\n${CYAN}Enter your choice [1-6]: ${RESET}"
 }
@@ -62,6 +63,10 @@ while true; do
             run_playbook "/opt/ansible/playbooks/log_server/main_playbook.yaml"
             ;;
         6)
+            echo -e "\n${RED}You selected 'database Server Setup'. This will configure the database server.${RESET}"  # Red color
+            run_playbook "/opt/ansible/playbooks/databases_server/main_playbook.yaml"
+            ;;
+        7)
             echo -e "\n${RED}Exiting... Goodbye! Have a nice day!${RESET}"  # Red color
             exit 0
             ;;
