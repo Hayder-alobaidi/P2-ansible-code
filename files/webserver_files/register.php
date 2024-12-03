@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$servername = "terraform-20241202204457971800000007.cf84642m41vi.us-east-1.rds.amazonaws.com";
+$servername = "databaseIP";
 $username = "admin";
 $password = "password";
 $dbname = "registration_app";
