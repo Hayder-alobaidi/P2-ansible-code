@@ -14,10 +14,10 @@
     #     group: root
     #     mode: '0600'   
 
-    - name: Copy index.php to /var/www/html
+    - name: Copy index.html to /var/www/html
       copy:
-        src: /opt/ansible/files/webserver_files/index.php
-        dest: /var/www/html/index.php
+        src: /opt/ansible/files/webserver_files/index.html
+        dest: /var/www/html/index.html
         owner: apache
         group: apache
         mode: '0644'

@@ -1,4 +1,5 @@
 ---
+
 - name: Copy 10-php.conf to /etc/httpd/conf.modules.d/
   copy:
     src: /opt/ansible/files/webserver_config/10-php.conf
@@ -7,19 +8,18 @@
     group: root
     mode: '0644'
 
-- name: Modify background color to light green for webserver2
-  lineinfile:
-     path: /var/www/html/index.html  # Path to your HTML file
-     regexp: 'background: linear-gradient\(45deg,.*\);'  # Regular expression to find the existing gradient
-     line: 'background: linear-gradient(45deg, #1e90ff, #4169e1, #4682b4);'  # New blue gradient for web-server-2
+- name: Replace text and colors in HTML file
+  replace:
+        path: /var/www/html/index.html
+        regexp: 'Web Server 1'
+        replace: 'Web Server 2'
   when: ansible_hostname == "web-server-2"
 
-    # Change the word "web Server 1" to "web Server 2" for webserver2
-- name: Change text "web Server 1" to "web Server 2" for webserver2
-  lineinfile:
-      path: /var/www/html/index.html
-      regexp: 'Web Server 1'  # Look for the current text "web Server 1"
-      line: 'Web Server 2'  # Change it to "web Server 2"
+- name: Replace gradient colors in big-text
+  replace:
+        path: /var/www/html/index.html
+        regexp: 'background: linear-gradient\(45deg, #1e90ff, #32cd32, #ffeb3b\);'
+        replace: 'background: linear-gradient(45deg, #ff4500, #1e90ff, #8a2be2);'
   when: ansible_hostname == "web-server-2"
 
 - name: Restart httpd service
