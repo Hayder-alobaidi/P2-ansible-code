@@ -70,11 +70,21 @@
 
 - name: Create users table
   mysql_query:
-    login_user: admin
-    login_password: password
+    login_user: root
+    login_password: ""
     query: |
       CREATE TABLE IF NOT EXISTS registration_app.users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL UNIQUE
       );
+
+
+- name: Get the private IP address of the database server
+  command: hostname -I | awk '{print $1}'
+  register: db_ip
+
+- name: Write the IP address to a file
+  copy:
+    content: "{{ db_ip.stdout }}"
+    dest: /tmp/db_ip.txt
