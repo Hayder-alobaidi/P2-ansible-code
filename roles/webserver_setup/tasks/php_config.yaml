@@ -26,3 +26,22 @@
   service:
     name: httpd
     state: restarted
+
+
+
+
+## THis block of code to replace the iP of the database
+- name: Copy the database IP from the controller to the webserver
+  copy:
+    src: /tmp/db_ip.txt
+    dest: /tmp/db_ip.txt
+
+- name: Read the IP address into a variable
+  command: cat /tmp/db_ip.txt
+  register: db_ip
+
+- name: Replace databaseIP in register.php with the actual database IP
+  replace:
+    path: /path/to/register.php
+    regexp: 'databaseIP'
+    replace: "{{ db_ip.stdout }}"
