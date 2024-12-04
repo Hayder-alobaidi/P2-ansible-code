@@ -53,7 +53,7 @@
     name: admin
     password: password
     priv: "registration_app.*:ALL"
-    host: "localhost"
+    host: "%"
     state: present
     login_user: root
     login_password: ""
@@ -63,7 +63,7 @@
     name: admin
     password: password
     priv: "registration_app.*:ALL"
-    host: "localhost"
+    host: "%"
     state: present
     login_user: root
     login_password: ""
