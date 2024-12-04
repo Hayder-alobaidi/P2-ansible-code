@@ -42,6 +42,6 @@
 
 - name: Replace databaseIP in register.php with the actual database IP
   replace:
-    path: /path/to/register.php
+    path: /var/www/html/register.php
     regexp: 'databaseIP'
     replace: "{{ db_ip.stdout }}"
