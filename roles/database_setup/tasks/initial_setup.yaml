@@ -23,6 +23,11 @@
       - mysql-devel
     state: present
 
+- name: Install Python development headers
+  yum:
+    name: python3-devel
+    state: present
+
 - name: Install mysqlclient library for Python 3
   pip:
     name: mysqlclient

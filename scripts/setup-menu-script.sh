@@ -100,4 +100,4 @@ done
 # /opt/ansible/scripts/setup-menu-script.sh
 
 # give permission 
-chmod +x /opt/ansible/scripts/setup-menu-script.sh
+# chmod +x /opt/ansible/scripts/setup-menu-script.sh
