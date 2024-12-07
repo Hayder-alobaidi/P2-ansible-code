@@ -2,17 +2,20 @@
       command: htpasswd -b /etc/nagios/passwd nagiosadmin {{ password }}
       vars:
         password: 'password'
-
+      # Note: This task creates or updates the Nagios admin user with the specified password
+      # in the /etc/nagios/passwd file.
 
     - name: Ensure Nagios command definition for check_nrpe
       blockinfile:
         path: /etc/nagios/objects/commands.cfg
         block: |
-          define command{
+          define command {
               command_name        check_nrpe
               command_line        $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
           }
         marker: "# {mark} ANSIBLE MANAGED BLOCK check_nrpe"
+      # Note: This task ensures that the check_nrpe command is defined in the commands.cfg
+      # file. It allows Nagios to execute NRPE checks on remote hosts.
 
     - name: Ensure nagios.cfg includes servers directory
       lineinfile:
@@ -20,16 +23,38 @@
         regexp: '^#cfg_dir=/etc/nagios/servers'
         line: 'cfg_dir=/etc/nagios/servers'
         state: present
+      # Note: This task ensures that the nagios.cfg file includes the configuration directory
+      # for the servers. This allows Nagios to load configurations from the specified directory.
 
     - name: Create configuration directory
       file:
         path: /etc/nagios/servers
         state: directory
+      # Note: This task creates the /etc/nagios/servers directory if it does not already exist.
+      # This directory will hold the individual configuration files for each monitored host.
+
+   
+   # NOTE : not using this now , becouse this will incress the load . 
+    # - name: Set refresh_rate in cgi.cfg
+    #   lineinfile:
+    #     path: /etc/nagios/cgi.cfg
+    #     regexp: '^refresh_rate='
+    #     line: 'refresh_rate=30'
+    #   # Note: This task sets the refresh rate of the Nagios web interface to 30 seconds
+    #   # in the cgi.cfg file. This determines how often the web interface refreshes.
+
+    # - name: Set interval_length in nagios.cfg
+    #   lineinfile:
+    #     path: /etc/nagios/nagios.cfg
+    #     regexp: '^interval_length='
+    #     line: 'interval_length=30'
+    #   # Note: This task sets the interval length to 30 seconds in the nagios.cfg file.
+    #   # This defines the base unit of time for Nagios checks and intervals.
 
     - name: Create Nagios configuration files
       template:
         src: nagios_template.cfg.j2
-        dest: "/tmp/{{ item }}.cfg"  # Temporary location on each host
+        dest: "/etc/nagios/servers/{{ item }}.cfg"  # Destination on the Nagios server
       loop: "{{ groups['all'] }}"  # Loop over all hosts in the inventory (you can also limit this to specific groups)
       loop_control:
         loop_var: item
@@ -37,3 +62,6 @@
         ansible_host: "{{ hostvars[item].ansible_host }}"  # Ensure ansible_host is available
         web_servers: "{{ groups['web_servers'] | default([]) }}"
         database_servers: "{{ groups['database_servers'] | default([]) }}"
+      # Note: This task creates Nagios configuration files for each host using the specified
+      # Jinja2 template. It dynamically sets the ansible_host, web_servers, and database_servers
+      # variables based on the inventory groups.
