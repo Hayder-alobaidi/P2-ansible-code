@@ -1,3 +1,11 @@
+    - name: Ensure /root/.ansible/tmp directory exists with correct permissions
+      file:
+        path: /root/.ansible/tmp
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
+
     - name: Set hostname to match inventory name
       hostname:
         name: "{{ inventory_hostname }}"
