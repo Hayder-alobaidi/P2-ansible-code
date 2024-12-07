@@ -1,8 +1,6 @@
 ---
-- name: Install and configure Nagios
-  tasks:
-    - name: Install Nagios
-      import_playbook: install_configure_nagios.yaml
+- name: Install Nagios
+  import_playbook: install_configure_nagios.yaml
 
-    - name: Configure Nagios
-      import_playbook: get-servers-cfg-file.yaml
+- name: Configure Nagios
+  import_playbook: get-servers-cfg-file.yaml

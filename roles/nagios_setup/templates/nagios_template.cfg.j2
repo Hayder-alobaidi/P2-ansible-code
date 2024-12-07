@@ -39,3 +39,29 @@ define service {
     service_description     Current Load
     check_command           check_nrpe!check_load!5.0,4.0,3.0!10.0,6.0,4.0
 }
+
+define service {
+    use                     generic-service
+    host_name               {{ item }}
+    service_description     Swap Usage
+    check_command           check_nrpe!check_swap
+}
+
+{% if item in web_servers %}
+define service {
+    use                     generic-service
+    host_name               {{ item }}
+    service_description     HTTP Check
+    check_command           check_nrpe!check_http
+}
+
+{% endif %}
+
+{% if item in database_servers %}
+define service {
+    use                     generic-service
+    host_name               {{ item }}
+    service_description     Database
+    check_command           check_nrpe!check_database
+}
+{% endif %}
