@@ -2,17 +2,17 @@
       file:
         path: /var/www/secure
         state: directory
-        owner: root
-        group: root
-        mode: '0700'
+        owner: apache
+        group: apache
+        mode: '0755'
         
     - name: Copy db_config.php to /var/www/secure
       copy:
         src: /opt/ansible/files/webserver_files/db_config.php
         dest: /var/www/secure/db_config.php
-        owner: root
-        group: root
-        mode: '0600'   
+        owner: apache
+        group: apache
+        mode: '0644'   
 
     - name: Copy index.html to /var/www/html
       copy:
