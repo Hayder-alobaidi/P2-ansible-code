@@ -6,13 +6,13 @@
         group: root
         mode: '0700'
         
-    # - name: Copy db_config.php to /var/www/secure
-    #   copy:
-    #     src: /opt/ansible/files/webserver_files/db_config.php
-    #     dest: /var/www/secure/db_config.php
-    #     owner: root
-    #     group: root
-    #     mode: '0600'   
+    - name: Copy db_config.php to /var/www/secure
+      copy:
+        src: /opt/ansible/files/webserver_files/db_config.php
+        dest: /var/www/secure/db_config.php
+        owner: root
+        group: root
+        mode: '0600'   
 
     - name: Copy index.html to /var/www/html
       copy:

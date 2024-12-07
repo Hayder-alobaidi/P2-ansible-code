@@ -2,10 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$servername = "databaseIP";
-$username = "admin";
-$password = "password";
-$dbname = "registration_app";
+// Include the database configuration file 
+require_once '/var/www/secure/db_config.php';
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

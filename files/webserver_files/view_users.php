@@ -23,12 +23,10 @@
                 <?php
                 error_reporting(E_ALL);
                 ini_set('display_errors', 1);
-
-                $servername = "terraform-20241202204457971800000007.cf84642m41vi.us-east-1.rds.amazonaws.com";
-                $username = "admin";
-                $password = "password";
-                $dbname = "registration_app";
-
+                
+                // Include the database configuration file 
+                require_once '/var/www/secure/db_config.php';
+                
                 $conn = new mysqli($servername, $username, $password, $dbname);
 
                 if ($conn->connect_error) {
