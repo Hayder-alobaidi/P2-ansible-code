@@ -30,8 +30,15 @@
       file:
         path: /etc/nagios/servers
         state: directory
+
+    - name: Create configuration directory
+      file:
+        path: /etc/nagios/backup
+        state: directory
       # Note: This task creates the /etc/nagios/servers directory if it does not already exist.
-      # This directory will hold the individual configuration files for each monitored host.
+      # Note: This task creates the /etc/nagios/backup directory if it does not already exist.
+      # Servers This directory will hold the individual configuration files for each monitored host.
+      # Backup This directory will hold the backup individual configuration files for each monitored host.
 
    
    # NOTE : not using this now , becouse this will incress the load . 

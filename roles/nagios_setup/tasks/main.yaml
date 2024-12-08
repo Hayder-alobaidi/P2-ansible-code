@@ -6,5 +6,8 @@
 - name: Include Nagios configuration tasks
   include_tasks: configure_nagios.yaml
 
+- name: Include Nagios manage scripts tasks
+  include_tasks: copy-manage-scripts.yaml
+
 - name: Include service management tasks
   include_tasks: start_services.yaml
