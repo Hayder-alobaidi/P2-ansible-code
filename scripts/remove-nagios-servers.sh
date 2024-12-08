@@ -40,6 +40,8 @@ REMOVE_HOST=${HOST_LIST[$((HOST_NUM-1))]}
 if [ -f "${NAGIOS_CONFIG_DIR}/${REMOVE_HOST}.cfg" ]; then
   sudo mv "${NAGIOS_CONFIG_DIR}/${REMOVE_HOST}.cfg" "${NAGIOS_BACKUP_DIR}/"
   echo -e "\n${GREEN}Moved ${REMOVE_HOST}.cfg to ${NAGIOS_BACKUP_DIR}.${RESET}"
+  echo -e "\n${BLUE}Server is removed now.${RESET}"
+
   # Restart Nagios service
   sudo systemctl restart ${NAGIOS_SERVICE}
   echo -e "\n${PURPLE}Nagios service restarted.${RESET}"

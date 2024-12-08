@@ -40,6 +40,7 @@ RESTORE_HOST=${BACKUP_LIST[$((BACKUP_NUM-1))]}
 if [ -f "${NAGIOS_BACKUP_DIR}/${RESTORE_HOST}.cfg" ]; then
   sudo mv "${NAGIOS_BACKUP_DIR}/${RESTORE_HOST}.cfg" "${NAGIOS_CONFIG_DIR}/"
   echo -e "\n${GREEN}Restored ${RESTORE_HOST}.cfg to ${NAGIOS_CONFIG_DIR}.${RESET}"
+  echo -e "\n${BLUE}Server has been restored.${RESET}"
   # Restart Nagios service
   sudo systemctl restart ${NAGIOS_SERVICE}
   echo -e "\n${PURPLE}Nagios service restarted.${RESET}"
