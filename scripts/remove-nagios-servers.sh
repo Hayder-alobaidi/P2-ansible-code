@@ -38,10 +38,10 @@ REMOVE_HOST=${HOST_LIST[$((HOST_NUM-1))]}
 
 # Move host configuration to backup if exists
 if [ -f "${NAGIOS_CONFIG_DIR}/${REMOVE_HOST}.cfg" ]; then
-  mv "${NAGIOS_CONFIG_DIR}/${REMOVE_HOST}.cfg" "${NAGIOS_BACKUP_DIR}/"
+  sudo mv "${NAGIOS_CONFIG_DIR}/${REMOVE_HOST}.cfg" "${NAGIOS_BACKUP_DIR}/"
   echo -e "\n${GREEN}Moved ${REMOVE_HOST}.cfg to ${NAGIOS_BACKUP_DIR}.${RESET}"
   # Restart Nagios service
-  systemctl restart ${NAGIOS_SERVICE}
+  sudo systemctl restart ${NAGIOS_SERVICE}
   echo -e "\n${PURPLE}Nagios service restarted.${RESET}"
 else
   echo -e "\n${RED}Host configuration file does not exist.${RESET}"

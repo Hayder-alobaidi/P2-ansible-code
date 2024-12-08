@@ -38,10 +38,10 @@ RESTORE_HOST=${BACKUP_LIST[$((BACKUP_NUM-1))]}
 
 # Restore host configuration if exists
 if [ -f "${NAGIOS_BACKUP_DIR}/${RESTORE_HOST}.cfg" ]; then
-  mv "${NAGIOS_BACKUP_DIR}/${RESTORE_HOST}.cfg" "${NAGIOS_CONFIG_DIR}/"
+  sudo mv "${NAGIOS_BACKUP_DIR}/${RESTORE_HOST}.cfg" "${NAGIOS_CONFIG_DIR}/"
   echo -e "\n${GREEN}Restored ${RESTORE_HOST}.cfg to ${NAGIOS_CONFIG_DIR}.${RESET}"
   # Restart Nagios service
-  systemctl restart ${NAGIOS_SERVICE}
+  sudo systemctl restart ${NAGIOS_SERVICE}
   echo -e "\n${PURPLE}Nagios service restarted.${RESET}"
 else
   echo -e "\n${RED}Backup configuration file does not exist.${RESET}"
