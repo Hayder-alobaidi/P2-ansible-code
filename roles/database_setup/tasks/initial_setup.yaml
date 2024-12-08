@@ -78,8 +78,16 @@
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL UNIQUE
       );
-
-
+- name: Create Nagios user with no password
+  mysql_user:
+    name: "nagios_user"
+    host: "localhost"
+    password: ""  # No password
+    state: present
+    priv: "*.*:SHOW DATABASES, SHOW TABLES, PROCESS, REPLICATION CLIENT" # Permissions required for monitoring
+    login_user: root
+    login_password: ""
+    
 # This task is to get the ip adderess of the database
 
 - name: Get the private IP address of the database server

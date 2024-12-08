@@ -1,0 +1,34 @@
+- name: Manage Nagios hosts
+  hosts: nagios-server
+  tasks:
+    - name: Upload manage_nagios.sh script to remote host
+      copy:
+        src: /opt/ansible/scripts/manage_nagios.sh
+        dest: /tmp/manage_nagios.sh
+        mode: '0755'
+
+    - name: Upload remove-nagios-servers.sh script to remote host
+      copy:
+        src: /opt/ansible/scripts/remove-nagios-servers.sh
+        dest: /tmp/remove-nagios-servers.sh
+        mode: '0755'
+
+    - name: Upload restore-nagios-servers.sh script to remote host
+      copy:
+        src: /opt/ansible/scripts/restore-nagios-servers.sh
+        dest: /tmp/restore-nagios-servers.sh
+        mode: '0755'
+
+    - name: Upload add-nagios-servers.sh script to remote host
+      copy:
+        src: /opt/ansible/scripts/add-nagios-servers.sh
+        dest: /tmp/add-nagios-servers.sh
+        mode: '0755'
+
+    - name: Execute manage_nagios.sh script
+      command: /tmp/manage_nagios.sh
+      register: script_output
+
+    - name: Display script output
+      debug:
+        var: script_output.stdout
