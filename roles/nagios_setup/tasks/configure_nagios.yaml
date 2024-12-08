@@ -51,6 +51,14 @@
     #   # Note: This task sets the interval length to 30 seconds in the nagios.cfg file.
     #   # This defines the base unit of time for Nagios checks and intervals.
 
+    - name: Ensure Servers directory exists
+      ansible.builtin.file:
+        path: /etc/nagios/servers
+        state: directory
+        owner: nagios
+        group: nagios
+        mode: '0755'
+
     - name: Create Nagios configuration files
       template:
         src: nagios_template.cfg.j2

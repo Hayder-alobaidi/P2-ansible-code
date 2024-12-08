@@ -23,3 +23,4 @@ echo -e "===============================================
  - Memory..........: $MEMORY1 / $MEMORY2
 ==============================================="  | /var/lib/snapd/snap/bin/lolcat
 
+chmod +x /opt/ansible/scripts/setup-menu-script.sh
