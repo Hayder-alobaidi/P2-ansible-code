@@ -84,7 +84,7 @@
     host: "localhost"
     password: ""  # No password
     state: present
-    priv: "*.*:SHOW DATABASES, SHOW TABLES, PROCESS, REPLICATION CLIENT" # Permissions required for monitoring
+    priv: "*.*:SELECT" # Permissions required for monitoring
     login_user: root
     login_password: ""
     
