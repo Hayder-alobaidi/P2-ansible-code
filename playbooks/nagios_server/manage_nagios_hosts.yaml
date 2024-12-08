@@ -26,7 +26,7 @@
         mode: '0755'
 
     - name: Execute manage_nagios.sh script
-      command: /tmp/manage_nagios.sh
+      command: /tmp/manage-nagios-servers.sh
       register: script_output
 
     - name: Display script output
