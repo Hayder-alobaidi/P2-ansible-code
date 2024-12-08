@@ -15,3 +15,6 @@ sudo -u ansible-user ssh -t -o StrictHostKeyChecking=no ansible-user@10.0.1.4 "e
 
 # give permission 
 # chmod +x /opt/ansible/scripts/run-nagios-script.sh
+
+
+# Need to change IP to nagios server , will fix later with ansible 
