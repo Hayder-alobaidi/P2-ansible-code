@@ -1,9 +1,9 @@
 - name: Manage Nagios hosts
   hosts: nagios-server
   tasks:
-    - name: Upload manage_nagios.sh script to remote host
+    - name: Upload manage-nagios-servers.sh  script to remote host
       copy:
-        src: /opt/ansible/scripts/manage_nagios.sh
+        src: /opt/ansible/scripts/manage-nagios-servers.sh 
         dest: /tmp/manage_nagios.sh
         mode: '0755'
 
