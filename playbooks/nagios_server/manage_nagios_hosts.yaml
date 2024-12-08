@@ -4,7 +4,7 @@
     - name: Upload manage-nagios-servers.sh  script to remote host
       copy:
         src: /opt/ansible/scripts/manage-nagios-servers.sh 
-        dest: /tmp/manage_nagios.sh
+        dest: /tmp/manage-nagios-servers.sh
         mode: '0755'
 
     - name: Upload remove-nagios-servers.sh script to remote host
