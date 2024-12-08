@@ -29,5 +29,6 @@
           - nagios-plugins-ssh
           - nagios-plugins-nrpe 
           - nagios-plugins-http
+          - nagios-plugins-mysql 
           - nrpe
         state: present

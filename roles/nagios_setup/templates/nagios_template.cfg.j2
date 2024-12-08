@@ -62,6 +62,6 @@ define service {
     use                     generic-service
     host_name               {{ item }}
     service_description     Database
-    check_command           check_nrpe!check_database
+    check_command           check_nrpe!check_mysql
 }
 {% endif %}
