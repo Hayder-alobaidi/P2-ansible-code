@@ -54,6 +54,14 @@
         owner: nagios
         group: nagios
         mode: '0644'
+    
+    - name: Copy database-server.cfg to Nagios server
+      ansible.builtin.copy:
+        src: /tmp/ansible_fetched_files/database-server.cfg
+        dest: /etc/nagios/servers/database-server.cfg
+        owner: nagios
+        group: nagios
+        mode: '0644'
 
     - name: Verify copied files on Nagios server
       shell: ls -l /etc/nagios/servers/
